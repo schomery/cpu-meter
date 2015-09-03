@@ -5,6 +5,9 @@ var unload = require('sdk/system/unload');
 var sp = require('sdk/simple-prefs');
 var prefs = sp.prefs;
 var os = require('sdk/system/runtime').OS;
+var tabs = require('sdk/tabs');
+var timers = require('sdk/timers');
+var self = require('sdk/self');
 var {viewFor} = require('sdk/view/core');
 
 function rgb (p) {
@@ -93,3 +96,22 @@ sp.on('period', function () {
     prefs.period = 1;
   }
 });
+/* welcome */
+(function () {
+  if (!prefs.welcome) {
+    return;
+  }
+  var version = prefs.version;
+  if (self.version !== version) {
+    timers.setTimeout(function () {
+      let url = 'http://firefox.add0n.com/cpu-meter.html?v=' + self.version;
+      if (version && version !== 'undefined') {
+        tabs.open({url: url + '&p=' + version + '&type=upgrade', inBackground: true});
+      }
+      else {
+        tabs.open(url + '&type=install');
+      }
+      prefs.version = self.version;
+    }, 3000);
+  }
+})();

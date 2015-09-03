@@ -5,7 +5,7 @@
   "description": "Displays CPU usage of Firefox instance in the addressbar.",
   "author": "Jeremy Schomery",
   "license": "MPL 2.0",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "icon": "data/icons/32.png",
   "icon64": "data/icons/64.png",
   "permissions": {
@@ -15,8 +15,8 @@
     "type": "integer",
     "name": "period",
     "value": 5,
-    "title": "Time intervals between CPU usage checks:"
-    "description": "minimum acceptable value is 1 second (5 seconds is recommended value)."
+    "title": "Time intervals between CPU usage checks:",
+    "description": "minimum acceptable value is 1 second (5 seconds is the recommended minimum value)."
   },
   {
     "type": "color",
